@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root,
+#modal {
+    font-family: 'Inter', sans-serif;
+}
+
+#auth-page {
+    background: url('./assets/auth.jpeg');
+}
+
+.fadeIn {
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.active {
+    background-color: #ffa500;
+    color: white;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
