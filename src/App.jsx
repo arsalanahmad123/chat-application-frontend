@@ -4,32 +4,63 @@ import Auth from './screens/Auth'
 import { Toaster } from 'react-hot-toast'
 import { useAuth } from './context/AuthContext'
 import Home from './screens/Home'
-import { Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
+import Conversation from "./screens/Conversation"
+import NotFound from './screens/NotFound'
+import { useEffect } from 'react'
 
 function App() {
-    const { loggedIn } = useAuth()
+    const { loggedIn,loading } = useAuth()
+
+    if (loading) {
+        return <div>Loading...</div>; 
+    }
+
 
     return (
         <>
             <Toaster position='top-right' />
             <Routes>
-                <Route
-                    path='/'
-                    element={
-                        loggedIn ? (
-                            <Layout>
-                                <Home />
-                            </Layout>
-                        ) : (
-                            <Navigate to='/auth' />
-                        )
-                    }
-                />
+                {
+                    loggedIn ? (
+                        <>
+                        <Route
+                            path='/'
+                            element={
+                                    <Layout>
+                                        <Home />
+                                    </Layout>
+                            }
+                        /> 
+                        <Route 
+                            path='/conversation/:slug'
+                            element={
+                                <Layout>
+                                    <Conversation />
+                                </Layout>
+                            }
+                        />
+                        <Route 
+                            path = "*"
+                            element={
+                                <Layout>
+                                    <NotFound />
+                                </Layout>
+                            }
+                        />
+                </>
+            ) : 
+            <>
                 <Route
                     path='/auth'
-                    element={loggedIn ? <Navigate to='/' /> : <Auth />}
+                    element={<Auth />}
                 />
+                <Route
+                    path='*'
+                    element={<Auth />}
+                    />
+            </>
+            }
             </Routes>
         </>
     )

@@ -4,7 +4,42 @@ import { api } from '../api/api'
 import toast from 'react-hot-toast'
 import { FaDeleteLeft as DeleteIcon } from 'react-icons/fa6'
 
-const ContactModal = ({ isOpen, onClose }) => {
+
+
+function ContactModal() {
+    return(
+         <div className='flex flex-col w-[400px]'>
+                    <h3 className='text-2xl font-semibold text-gray-800 mb-4'>
+                        Add Contact
+                    </h3>
+                    <div className='join mb-7'>
+                        <input
+                            type='text'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder='Enter valid Contact Email Address'
+                            className='text-sm input input-bordered input-sm join-item ring-0 outline-none focus:outline-none focus:ring-0'
+                        />
+                        <button
+                            onClick={createContact}
+                            className='btn btn-sm rounded-r-full join-item'
+                        >
+                            Add
+                        </button>
+                    </div>
+
+                    <button
+                        onClick={onClose}
+                        className='mt-auto px-2 py-1 text-sm bg-accent text-white rounded ml-auto'
+                    >
+                        Close
+                    </button>
+                </div>
+    )
+}
+
+
+const Contacts = ({ isOpen, onClose }) => {
     const [contacts, setContacts] = useState([])
     const [email, setEmail] = useState('')
 
@@ -65,16 +100,10 @@ const ContactModal = ({ isOpen, onClose }) => {
         }
     }
 
-    if (!isOpen) return null
 
-    return createPortal(
-        <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
-            <div className='bg-white p-8 rounded shadow-lg flex flex-row justify-between max-w-[700px] gap-5'>
-                <div>
-                    <h2 className='text-xl mb-2 text-gray-900 font-semibold'>
-                        Contacts
-                    </h2>
-                    <div className='w-[300px] bg-gray-200 p-2 max-h-[500px] overflow-auto mt-4'>
+    return (
+        <div className='flex justify-start items-start'>
+                    <div className='p-2 mt-4'>
                         {contacts.map((contact) => (
                             <div
                                 className='w-full bg-gray-100 backdrop-filter backdrop-blur-lg'
@@ -105,41 +134,11 @@ const ContactModal = ({ isOpen, onClose }) => {
                             </div>
                         ))}
                         {contacts.length === 0 && (
-                            <span className='text-sm'>No Contacts </span>
+                            <span className='font-semibold'>No Contacts </span>
                         )}
                     </div>
-                </div>
-                <div className='flex flex-col w-[400px]'>
-                    <h3 className='text-2xl font-semibold text-gray-800 mb-4'>
-                        Add Contact
-                    </h3>
-                    <div className='join mb-7'>
-                        <input
-                            type='text'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder='Enter valid Contact Email Address'
-                            className='text-sm input input-bordered input-sm join-item ring-0 outline-none focus:outline-none focus:ring-0'
-                        />
-                        <button
-                            onClick={createContact}
-                            className='btn btn-sm rounded-r-full join-item'
-                        >
-                            Add
-                        </button>
-                    </div>
-
-                    <button
-                        onClick={onClose}
-                        className='mt-auto px-2 py-1 text-sm bg-accent text-white rounded ml-auto'
-                    >
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>,
-        document.getElementById('modal'),
+        </div>
     )
 }
 
-export default ContactModal
+export default Contacts
