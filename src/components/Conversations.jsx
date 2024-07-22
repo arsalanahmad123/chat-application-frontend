@@ -39,7 +39,7 @@ const Conversations = () => {
             {
                 conversations?.length > 0 && conversations.map((conversation,i) => {
                     return (
-                        <Link key={i} className='py-5 font-semibold pl-5 bg-gray-100 dark:bg-slate-800 dark:border-gray-700 border-b border-gray-200 cursor-pointer' to={`/conversation/${conversation._id}`}>
+                        <Link key={i} className='py-5 font-semibold pl-5 bg-gray-100 dark:bg-slate-800 dark:border-gray-700 border-b border-gray-200 cursor-pointer' to={`/conversation/${conversation.participants[0]._id}`}>
                             {
                                 conversation.participants[0].username.toUpperCase()
                             }

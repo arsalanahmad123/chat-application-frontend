@@ -59,7 +59,7 @@ const Nav = () => {
 
     return (
         <div className='flex flex-row min-h-screen w-full border-r dark:border-none justify-start'>
-            <div className='flex flex-col justify-start gap-y-2 bg-gray-200 dark:bg-slate-600 p-3'>
+            <div className='flex flex-col justify-start gap-y-5 bg-gray-200 dark:bg-slate-600 p-3'>
                 <button
                     onClick={() => setActiveSection('chats')}
                     className={`p-4 rounded-lg ${

@@ -36,18 +36,20 @@ const Conversation = () => {
         const response = await  api.get(`/api/conversations/${slug}`)
 
         if(response.status===200){
-          const data = response.data.data 
+          const data = response.data?.data
           setMessages(data.messages)
           const users = data.participants[0]
           setChatUser(users)
 
+        }
+        if(response.status===202){
+            setChatUser(response.data.user)
         }
 
       } catch (error) {
         console.log(error)
       }
     }
-
     
 useEffect(() => {
     getConversation()
@@ -75,7 +77,7 @@ useEffect(() => {
   return (
     <div className='flex flex-col pb-24'>
       <ChatHeader username={chatUser.username} email={chatUser.email} /> 
-      <Messages messages={messages} chatID={chatUser._id} slug={slug} />
+      <Messages messages={messages} chatID={chatUser._id} />
     </div>
   )
 }

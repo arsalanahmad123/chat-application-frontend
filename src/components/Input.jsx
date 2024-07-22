@@ -15,14 +15,17 @@ const Input = ({chatID,conversationID}) => {
                 return 
             }
 
-            const response = await api.post('/api/conversations/send',{
+
+            const response = conversationID ? await api.post('/api/conversations/send',{
                 receiverId: chatID,
                 message,
                 conversationID
+            }) : api.post('/api/conversations/send',{
+                receiverId: chatID,
+                message,
             })
 
             
-
             if(response.status===201){
                 socket.emit('newMessage',response.data)
                 setMessage('')
